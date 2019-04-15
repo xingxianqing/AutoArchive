@@ -1,6 +1,6 @@
 
 
-### iOS 自动化之路 --（使用xcodebuild + fir + python + AppleScript实现一键自动打包）
+### iOS 自动化之路 --（使用 Xcodebuild + fir.im + Python + AppleScript实现一键自动打包）
 
 	
 
