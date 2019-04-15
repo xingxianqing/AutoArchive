@@ -4,16 +4,16 @@
 
 	
 
-### 步骤
+### 一、打包步骤如下
 - 打包
 - 导出
 - 上传
 - 打开网页
 - 删除archive包和ipa包
 
-### 需要使用：
+### 二、准备：
 
-- 需要把打包使用的plist文件生成出来
+- 需要把打包使用的plist文件准备好（可以根据自己需要通过手动打包生成，我这里是一个项目中有两个target）
 <img src="img/autoArchiveFile.png"/>
 
 - xcodebuild （打包 和 导出 使用）
@@ -26,21 +26,19 @@
 <img src="img/fir_api_token.jpg"/>
 
 
-2.fir-cli
+2.需要安装fir 平台的工具 fir-cli
+
+```
+gem install  fir-cli
+
+```
+
+以下为fir-cli的使用
 
 <img src="img/fir-cli.png"/>
 
 
-### python脚本
-
-
-**打包命令**
-
-
-```
-python ~/Desktop/autoArchive/archive.py -s <targetName>
-
-```
+### python脚本(这边是针对在同一个项目中有两个target进行编写的)
 
 **脚本内容**
 
@@ -184,13 +182,20 @@ if __name__ == '__main__':
 
 ```
 
+我这边脚本是放在~/Desktop/autoArchive目录下的，使用以下命令，就可以进行打包了
+
+```
+python ~/Desktop/autoArchive/archive.py -s <targetName>
+
+```
+
 **效果**
 
 <img src="img/WechatIMG149.jpeg"/>
 
 
 
-### AppleScript
+### 四、使用AppleScript代替每次执行自动打包脚本都需要去终端输入命令的操作
 
 AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。
 
