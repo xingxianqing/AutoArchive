@@ -1,17 +1,17 @@
 
 
-###iOS 自动化之路 --（使用xcodebuild + fir + python + AppleScript实现一键自动打包）
+### iOS 自动化之路 --（使用xcodebuild + fir + python + AppleScript实现一键自动打包）
 
 	
 
-###步骤
+### 步骤
 - 打包
 - 导出
 - 上传
 - 打开网页
 - 删除archive包和ipa包
 
-###需要使用：
+### 需要使用：
 
 - 需要把打包使用的plist文件生成出来
 <img src="img/autoArchiveFile.png"/>
@@ -31,7 +31,7 @@
 <img src="img/fir-cli.png"/>
 
 
-###python脚本
+### python脚本
 
 
 **打包命令**
@@ -190,7 +190,7 @@ if __name__ == '__main__':
 
 
 
-###AppleScript
+### AppleScript
 
 AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。
 
@@ -211,13 +211,21 @@ AppleScript使用 mac 自带的脚本编辑器进行编译运行
 
 
 ```
-tell application "iTerm"	create window with default profile	select first window	tell the first window		tell current session to write text "cd ~/Documents/91jinronglicai"		tell current session to write text "python ~/Desktop/autoArchive/archive.py -s WangCaiTarget"	end tellend tell
+tell application "iTerm"
+	create window with default profile
+	select first window
+	tell the first window
+		tell current session to write text "cd ~/Documents/91jinronglicai"
+		tell current session to write text "python ~/Desktop/autoArchive/archive.py -s WangCaiTarget"
+	end tell
+end tell
 ```
 
 如果想有声音提示，加上beep即可，beep 、 beep 2
 
 ```
-set testString to "test"display dialog testString
+set testString to "test"
+display dialog testString
 beep 3
 ```
 
