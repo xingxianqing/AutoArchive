@@ -1,51 +1,4 @@
 
-
-###iOS 自动化之路 --（使用xcodebuild + fir + python + AppleScript实现一键自动打包）
-
-	
-
-###步骤
-- 打包
-- 导出
-- 上传
-- 打开网页
-- 删除archive包和ipa包
-
-###需要使用：
-
-- 需要把打包使用的plist文件生成出来
-<img src="img/autoArchiveFile.png"/>
-
-- xcodebuild （打包 和 导出 使用）
-<img src="img/xcodebuild.jpg"/>
-
-- fir（上传步骤 使用fir.im，也可以使用其他平台）
-
-1.注册fir.im，拿到api_token
-
-<img src="img/fir_api_token.jpg"/>
-
-
-2.fir-cli
-
-<img src="img/fir-cli.png"/>
-
-
-###python脚本
-
-
-**打包命令**
-
-
-```
-python ~/Desktop/autoArchive/archive.py -s <targetName>
-
-```
-
-**脚本内容**
-
-
-```
 # -*- coding:utf-8 -*-
 #!/usr/bin/env python
 
@@ -64,27 +17,20 @@ import commands
 
 #==============================设置常量====================================
 #下面关于list中的元素，在配置的时候顺序要对应
-WORKSPACE_NAME="xxxxxxxx.xcworkspace"
-TARGETS=['xxxxxxxx','xxxxxxxx']
+WORKSPACE_NAME="xxxxx.xcworkspace"
+TARGETS=['target_name_1','target_name_2']
 BUILD_CONFIGURATION= 'Debug'  #'Debug' 或者 Release
 ARCHIVE_PATH='~/Desktop'
-# =============================Enterprise配置====================================
-EXPORT_PLIST_PATH=['xxxxxxxx', 'xxxxxxxx']
-BUILD_CODE_SIGN_IDENTITY=['xxxxxxxx','xxxxxxxx']
-BUILD_PROVISIONING_PROFILE_SPECIFIER=['xxxxxxxx','xxxxxxxx']
-# =============================development配置（自动化使用）====================================
-# BUILD_CODE_SIGN_IDENTITY=['xxxxxxxx','xxxxxxxx']
-# BUILD_PROVISIONING_PROFILE_SPECIFIER=['xxxxxxxx','xxxxxxxx'];
-# EXPORT_PLIST_PATH=['xxxxxxxx.plist','xxxxxxxx.plist']
-# ==============================推送包使用developer证书===========================================
-# EXPORT_PLIST_PATH=['xxxxxxxx.plist','xxxxxxxx.plist']
-# BUILD_CODE_SIGN_IDENTITY=['xxxxxxxx','xxxxxxxx']
-# BUILD_PROVISIONING_PROFILE_SPECIFIER=['xxxxxxxx','xxxxxxxx']
+# =============================配置====================================
+# plist文件可以通过手动打包一次获得，文件夹中会有生成的。
+EXPORT_PLIST_PATH=['第一个 target 的 plist文件路径','第二个 target 的 plist文件路径']
+BUILD_CODE_SIGN_IDENTITY=['第一个 target 的证书名字','第二个 target 的证书名字']
+BUILD_PROVISIONING_PROFILE_SPECIFIER=['第一个 target 证书对应的描述文件','第二个 target 证书对应的描述文件']
 
 #fir.im API Token
-FIR_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxx"
+FIR_TOKEN="d79f68f0bxxxxxxxxxxx09ddf0c6985f65"
 #app在fir.im的下载页面地址
-TARGET_URL_ADDRESS=['https://fir.im/apps/xxxxxxxxxxxxxxxxxxx','https://fir.im/apps/xxxxxxxxxxxxxxxxxxx']  
+TARGET_URL_ADDRESS=['第一个 target 在fir.im的下载页面地址','第二个 target 在fir.im的下载页面地址']  
 #target在list中的索引
 INDEX=0
 
@@ -170,7 +116,8 @@ def xcbuild(options):
 	if workspace is not None and scheme is not None:
 		archiveWorkspace(workspace, scheme)
 	else:
-		statusLog('请先配置workspace、scheme信息')
+		statusLog('请先配置workspace、scheme信息')	
+		
 	
 def main():
 	parser = argparse.ArgumentParser()
@@ -182,50 +129,3 @@ def main():
 if __name__ == '__main__':
 	main()
 
-```
-
-**效果**
-
-<img src="img/WechatIMG149.jpeg"/>
-
-
-
-###AppleScript
-
-AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。
-
-AppleScript使用 mac 自带的脚本编辑器进行编译运行
-
-<img src="img/123.png"/>
-
-打开编辑器，选择 文件 -> 打开词典 可以看见支持AppleScript操作的应用
-
-<img src="img/cidian.png"/>
-
-选择需要操作的应用，可以查看API
-
-<img src="img/api.png"/>
-
-
-**例**：这里使用脚本代替每次执行自动打包脚本需要输入命令的操作
-
-
-```
-tell application "iTerm"	create window with default profile	select first window	tell the first window		tell current session to write text "cd ~/Documents/91jinronglicai"		tell current session to write text "python ~/Desktop/autoArchive/archive.py -s WangCaiTarget"	end tellend tell
-```
-
-如果想有声音提示，加上beep即可，beep 、 beep 2
-
-```
-set testString to "test"display dialog testString
-beep 3
-```
-
-
-AppleAcript入门 <https://segmentfault.com/a/1190000011273388>
-
-脚本编译运行成功之后可以导出为仅运行的程序
-
-<img src="img/application.png"/>
-
-现在点击图标，运行，即可打包了 
