@@ -38,7 +38,7 @@ gem install  fir-cli
 <img src="img/fir-cli.png"/>
 
 
-### python脚本(这边是针对在同一个项目中有两个target进行编写的)
+### 三、python脚本(这边是针对在同一个项目中有两个target进行编写的)
 
 **脚本内容**
 
