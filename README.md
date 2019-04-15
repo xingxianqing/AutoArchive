@@ -28,10 +28,12 @@
 
 2.需要安装fir 平台的工具 fir-cli
 
+
 ```
 gem install  fir-cli
 
 ```
+
 
 以下为fir-cli的使用
 
@@ -41,6 +43,7 @@ gem install  fir-cli
 ### 三、python脚本(这边是针对在同一个项目中有两个target进行编写的)
 
 **脚本内容**
+
 
 
 ```
@@ -182,12 +185,15 @@ if __name__ == '__main__':
 
 ```
 
+
 我这边脚本是放在~/Desktop/autoArchive目录下的，使用以下命令，就可以进行打包了
+
 
 ```
 python ~/Desktop/autoArchive/archive.py -s <targetName>
 
 ```
+
 
 **效果**
 
@@ -215,6 +221,7 @@ AppleScript使用 mac 自带的脚本编辑器进行编译运行
 **例**：这里使用脚本代替每次执行自动打包脚本需要输入命令的操作
 
 
+
 ```
 tell application "iTerm"
 	create window with default profile
@@ -226,13 +233,16 @@ tell application "iTerm"
 end tell
 ```
 
+
 如果想有声音提示，加上beep即可，beep 、 beep 2
+
 
 ```
 set testString to "test"
 display dialog testString
 beep 3
 ```
+
 
 
 AppleAcript入门 <https://segmentfault.com/a/1190000011273388>
